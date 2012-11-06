@@ -1,0 +1,37 @@
+#mywizard {
+	height: 200px;
+	margin: 2em;
+	background-color: #eee;
+	box-shadow: 0 0 3px #888;
+}
+
+.prevStep, .nextStep, .button {
+	width: 150px;
+	height: 15px;
+	padding: 20px;
+	background-color: #ccc;
+	cursor: pointer;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 67px;
+}
+
+.prevStep:hover, .nextStep:hover, .button:hover {
+	opacity: 0.8;
+}
+
+.nextStep {
+	float: right;
+	border-top-left-radius: 67px;
+}
+
+.prevStep {
+	float: left;
+	border-top-right-radius: 67px;
+}
+
+.step {
+	text-align: center;
+	font-size: 2em;
+	padding-top: 78px;
+}
