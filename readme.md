@@ -6,6 +6,9 @@ Shows DOM-containers sequentially with next and previous buttons.
 - Steps can use multiple containers - they only need the right step number class
 - Animation
 
+# Dependencies
+- jQuery
+
 # Usage
 The default is to use elements with class ``step`` in the order defined by classes ``stepN``, for example ``step1``, ``step2``, etc.
 
