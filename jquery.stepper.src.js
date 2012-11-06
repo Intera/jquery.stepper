@@ -1,3 +1,4 @@
+/* jquery.stepper.src.js 2012-11-6 | https://github.com/Intera/jquery.stepper */
 jQuery.fn.stepper = function (config) {
 
 	// merge default config
