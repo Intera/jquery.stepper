@@ -30,7 +30,7 @@ $(function () {
 A stepper step container HTML structure in css terms:
 
 ```css
-  div.mystepcontainer
+  div#mywizard
     div.step.step1
       div.nextStep
     div.step.step2
@@ -45,7 +45,7 @@ A stepper step container HTML structure in css terms:
 |optionName|description|optionValue|
 ----|----|----
 |stepConfig|Only to set steps manually|{stepNumber: jqueryObject, ...}|
-|onAfterChange|Animation when changing steps|jQuery animation name|
+|animation|Animation when changing steps|jQuery animation name|
 |onStepChange|Must return a true value, otherwise the step change is aborted. Example use case: validation.|function(from, to, stepper)|
 
 # Methods
