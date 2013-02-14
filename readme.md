@@ -46,13 +46,13 @@ A stepper step container HTML structure in css terms:
 ----|----|----
 |stepConfig|Only to set steps manually|{stepNumber: jqueryObject, ...}|
 |animation|Animation when changing steps|jQuery animation name|
+|animationSpeed|Millisecond duration of the animation|integer|
 |onStepChange|Must return a true value, otherwise the step change is aborted. Example use case: validation.|function(from, to, stepper)|
 
 # Methods
 - showStep(number)
 - hideAll()
 - showFirstStepThatContains(selector)
-- hideAll()
 - nextStep()
 - prevStep()
 - get(number)
