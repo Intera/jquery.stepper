@@ -25,7 +25,7 @@ jQuery.fn.stepper = function (config) {
 	var stepper = {
 
 		// the currently active step number
-		activeStep: 1,
+		activeStepNumber: 1,
 		stepConfig: config.stepConfig,
 		container: This,
 		onStepChange: config.onStepChange,
@@ -43,10 +43,10 @@ jQuery.fn.stepper = function (config) {
 		},
 
 		nextStep: function () {
-			this.showStep(this.activeStep + 1)
+			this.showStep(this.activeStepNumber + 1)
 		},
 		prevStep: function () {
-			this.showStep(this.activeStep - 1)
+			this.showStep(this.activeStepNumber - 1)
 		},
 
 		setButtonEvents: function (step) {
@@ -88,7 +88,7 @@ jQuery.fn.stepper = function (config) {
 			var nextStep = this.get(number)
 
 			// continue only if onStepChange is true
-			if (this.onStepChange(this.activestep, number, this, nextStep)) {
+			if (this.onStepChange(this.activeStepNumber, number, this, nextStep)) {
 
 				this.hideAll()
 
@@ -107,7 +107,7 @@ jQuery.fn.stepper = function (config) {
 				else {
 					n.show()
 				}
-				this.activeStep = number
+				this.activeStepNumber = number
 			}
 
 			return this
