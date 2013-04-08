@@ -1,4 +1,4 @@
-/* jquery.stepper.src.js 2012-11-6 | https://github.com/Intera/jquery.stepper */
+/* jquery.stepper.src.js 2013-4-8 | https://github.com/Intera/jquery.stepper */
 jQuery.fn.stepper = function (config) {
 
 	// merge default config
@@ -10,7 +10,9 @@ jQuery.fn.stepper = function (config) {
 		animation: 'fadeIn',
 
 		// called on "show step", return true to continue switching
-		onStepChange: function (from, to, stepper) { return true }
+		onStepChange: function (from, to, stepper, nextStep) { return true },
+
+		onAfterStepChange: function (from, to, stepper, nextStep) { }
 	}
 
 	var config = $.extend(
@@ -18,17 +20,15 @@ jQuery.fn.stepper = function (config) {
 		config
 	)
 
-	// the jquery object for which the .stepper method is called
-	var This = this
-
 	// create stepper object
 	var stepper = {
 
 		// the currently active step number
 		activeStepNumber: 1,
 		stepConfig: config.stepConfig,
-		container: This,
+		container: this,
 		onStepChange: config.onStepChange,
+		onAfterStepChange: config.onAfterStepChange,
 		defaultAnimation: config.animation,
 		animationSpeed: config.animationSpeed || 190,
 		numberOfSteps: 0,
@@ -49,10 +49,17 @@ jQuery.fn.stepper = function (config) {
 			this.showStep(this.activeStepNumber - 1)
 		},
 
+		disableButtonEvents: function () {
+			var step = this.get(this.activeStepNumber)
+			step.find('.nextStep,.prevStep').off('click.stepper')
+		},
+
+		enableButtonEvents: function () { this.setButtonEvents(this.get(this.activeStepNumber)) },
+
 		setButtonEvents: function (step) {
-			var This = this
-			step.find('.nextStep').unbind('click.stepper').bind('click.stepper', function () { This.nextStep() })
-			step.find('.prevStep').unbind('click.stepper').bind('click.stepper', function () { This.prevStep() })
+			//remove existing events because containers can be reused and used in different orders at the same time
+			step.find('.nextStep').off('click.stepper').on('click.stepper', function (event) { stepper.nextStep(); return false; })
+			step.find('.prevStep').off('click.stepper').on('click.stepper', function (event) { stepper.prevStep(); return false; })
 			return step
 		},
 
@@ -97,15 +104,19 @@ jQuery.fn.stepper = function (config) {
 
 				var nextStepContainer = nextStep.parent('div').show()
 				var n = nextStep
+				var previousStepNumber = stepper.activeStepNumber
+				function onComplete () {
+					config.onAfterStepChange(previousStepNumber, number, stepper, nextStep)
+				}
 				if (this.defaultAnimation) {
 					var da = this.defaultAnimation
-					if ('fadeIn' == da) { n.fadeIn(this.animationSpeed) }
-					else if ('slideDown' == da) { n.slideDown(this.animationSpeed)	}
-					else if ('slideUp' == da) {	n.slideUp(this.animationSpeed) }
-					else { n.show()	}
+					if ('fadeIn' == da) { n.fadeIn(this.animationSpeed, onComplete) }
+					else if ('slideDown' == da) { n.slideDown(this.animationSpeed, onComplete)	}
+					else if ('slideUp' == da) {	n.slideUp(this.animationSpeed, onComplete) }
+					else { n.show(this.animationSpeed, onComplete)	}
 				}
 				else {
-					n.show()
+					n.show(this.animationSpeed, onComplete)
 				}
 				this.activeStepNumber = number
 			}

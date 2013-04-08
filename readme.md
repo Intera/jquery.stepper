@@ -47,7 +47,8 @@ A stepper step container HTML structure in css terms:
 |stepConfig|Only to set steps manually|{stepNumber: jqueryObject, ...}|
 |animation|Animation when changing steps|jQuery animation name|
 |animationSpeed|Millisecond duration for the animation|integer|
-|onStepChange|Must return a true value, otherwise the step change is aborted. Example use case: validation.|function(from, to, stepper)|
+|onStepChange|Must return a true value, otherwise the step change is aborted. Example use case: validation.|function(from, to, stepper, nextStep)|
+|onAfterStepChange|Called after the next step element has been displayed|function(from, to, stepper, nextStep)|
 
 # Methods
 - showStep(number)
@@ -56,3 +57,5 @@ A stepper step container HTML structure in css terms:
 - nextStep()
 - prevStep()
 - get(number)
+- disableButtonEvents()
+- enableButtonEvents()
