@@ -1,15 +1,15 @@
 # jquery.stepper
-Shows DOM elements sequentially with next and previous buttons.
+Shows DOM-elements sequentially with forward and back buttons and events.
 
 # Features
 - Arbitrary DOM-elements can be displayed sequentially
 - Unlimited number of steppers per page
 - Multiple steppers can share DOM-elements
-- Handling of first and last page
-- Complete configuration through CSS classes possible (by specifying step numbers in class names)
-- Callback methods - Setting different titles per step or other custom actions
-- Steps can be outside the stepContainer (and the 'previous' button still works as expected)
-- Steps can use multiple elements - they only need the right step number class and are all shown at the same time
+- forward/back-Button hiding/display and events for the first and last page
+- Configuration can be made by CSS classes (by using step numbers in class names)
+- Events - for example for setting different titles per step or other custom actions
+- Steps can be outside a main "stepContainer" (and the back-button still works as expected)
+- Steps can show/hide multiple elements at once - they only need the right class
 - Animation
 
 # Dependencies
