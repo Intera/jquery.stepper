@@ -18,6 +18,7 @@ Shows DOM-elements sequentially with forward and back buttons and events.
 # Usage
 The default is to use elements with class ``step`` in the order defined by additional classes ``stepN``. For example ``step1``, ``step2``, etc.
 Elements with the class "nextStep" or "prevStep" get the corresponding functionality in context.
+Steps can also be configured with the "stepConfig" option.
 
 ## Example
 ```javascript
