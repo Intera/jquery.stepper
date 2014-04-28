@@ -5,11 +5,11 @@ Shows DOM-elements sequentially with forward and back buttons and events.
 - Arbitrary DOM-elements can be displayed sequentially
 - Unlimited number of steppers per page
 - Multiple steppers can share DOM-elements
-- forward/back-Button hiding/display and events for the first and last page
-- Configuration can be made by CSS classes (by using step numbers in class names)
+- forward/back-button hiding/display and events for the first and last page
+- Step and order configuration can be made with CSS classes
 - Events - for example for setting different titles per step or other custom actions
 - Steps can be outside a main "stepContainer" (and the back-button still works as expected)
-- Steps can show/hide multiple elements at once - they only need the right class
+- Steps can show/hide multiple elements at once
 - Animation
 
 # Dependencies
@@ -22,12 +22,12 @@ Elements with the class "nextStep" or "prevStep" get the corresponding functiona
 ## Example
 ```javascript
 $(function () {
-	var myWizard = $('#mywizard').stepper();
-	myWizard.showStep(1);
+	var myWizard = $('#mywizard').stepper()
+	myWizard.showStep(1)
 });
 ```
 
-A stepper step container HTML structure in css terms:
+An example stepper container HTML-structure using CSS-classes (not required):
 
 ```css
   div#mywizard
@@ -44,7 +44,7 @@ A stepper step container HTML structure in css terms:
 # Options
 |optionName|description|optionValue|
 ----|----|----
-|stepConfig|Only to set steps manually|{stepNumber: jqueryObject, ...}|
+|stepConfig|To set step containers and order manually|{stepNumber: jqueryObject, ...}|
 |animation|Animation when changing steps|jQuery animation name|
 |animationSpeed|Millisecond duration for the animation|integer|
 |onStepChange|Must return a true value, otherwise the step change is aborted. Example use case: validation.|function(from, to, stepper, nextStep)|
