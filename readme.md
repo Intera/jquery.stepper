@@ -50,6 +50,9 @@ An example stepper container HTML-structure using CSS-classes (not required):
 |animationSpeed|Millisecond duration for the animation|integer|
 |onStepChange|Must return a true value, otherwise the step change is aborted. Example use case: validation.|function(from, to, stepper, nextStep)|
 |onAfterStepChange|Called after the next step element has been displayed|function(from, to, stepper, nextStep)|
+|forwardButton|For retrieving the forwardButton by jQuery-selector, jQuery-object or function|string, jQuery, function(step)|
+|backButton|For retrieving the backButton by jQuery-selector, jQuery-object or function|string, jQuery, function(step)|
+|autoHideBackForward|If true, hides the back button on the first step and the forward button on the last step. The default is "true"|boolean|
 
 # Methods
 - showStep(number)

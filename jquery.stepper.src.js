@@ -16,7 +16,8 @@ jQuery.fn.stepper = function (config) {
 		onAfterStepChange: function(from, to, stepper, nextStep) { },
 
 		forwardButton: function(step) { return step.find(".nextStep") },
-		backButton: function(step) { return step.find(".prevStep") }
+		backButton: function(step) { return step.find(".prevStep") },
+		autoHideBackForward: true
 	}
 
 	var config = $.extend(
@@ -108,13 +109,15 @@ jQuery.fn.stepper = function (config) {
 
 				this.hideAll()
 
-				if (number < 2) {
-					getButton(config.backButton).hide()
-					getButton(config.forwardButton).show()
-				}
-				else if (number >= this.numberOfSteps) {
-					getButton(config.forwardButton).hide()
-					getButton(config.backButton).show()
+				if (config.autoHideBackForward) {
+					if (number < 2) {
+						getButton(config.backButton).hide()
+						getButton(config.forwardButton).show()
+					}
+					else if (number >= this.numberOfSteps) {
+						getButton(config.forwardButton).hide()
+						getButton(config.backButton).show()
+					}
 				}
 
 				// dom structure is only known with steps that are in "this.container"
