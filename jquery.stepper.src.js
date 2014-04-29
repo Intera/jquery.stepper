@@ -1,4 +1,5 @@
 /* jquery.stepper.src.js 2013-4-8 | https://github.com/Intera/jquery.stepper */
+
 jQuery.fn.stepper = function (config) {
 
 	// merge default config
@@ -7,18 +8,26 @@ jQuery.fn.stepper = function (config) {
 		// overwrite\set steps. format { stepNumber: jqueryObject }
 		stepConfig: {},
 
-		animation: 'fadeIn',
+		animation: "fadeIn",
 
 		// called on "show step", return true to continue switching
-		onStepChange: function (from, to, stepper, nextStep) { return true },
+		onStepChange: function(from, to, stepper, nextStep) { return true },
 
-		onAfterStepChange: function (from, to, stepper, nextStep) { }
+		onAfterStepChange: function(from, to, stepper, nextStep) { },
+
+		forwardButton: function(step) { return step.find(".nextStep") },
+		backButton: function(step) { return step.find(".prevStep") }
 	}
 
 	var config = $.extend(
 		defaultConfig,
 		config
 	)
+
+	function getButton(config, step) {
+		if ($.isFunction(config)) return config(step)
+		else return (typeof config == "string") ? $(config) : config
+	}
 
 	// create stepper object
 	var stepper = {
@@ -38,7 +47,7 @@ jQuery.fn.stepper = function (config) {
 			if (this.stepConfig && this.stepConfig[number]) {
 				return this.stepConfig[number]
 			} else {
-				return this.container.find('.step' + number)
+				return this.container.find(".step" + number)
 			}
 		},
 
@@ -51,15 +60,15 @@ jQuery.fn.stepper = function (config) {
 
 		disableButtonEvents: function () {
 			var step = this.get(this.activeStepNumber)
-			step.find('.nextStep,.prevStep').off('click.stepper')
+			getButton(config.forwardButton).add(getButton(config.backButton)).off("click.stepper")
 		},
 
 		enableButtonEvents: function () { this.setButtonEvents(this.get(this.activeStepNumber)) },
 
 		setButtonEvents: function (step) {
 			//remove existing events because containers can be reused and used in different orders at the same time
-			step.find('.nextStep').off('click.stepper').on('click.stepper', function (event) { stepper.nextStep(); return false; })
-			step.find('.prevStep').off('click.stepper').on('click.stepper', function (event) { stepper.prevStep(); return false; })
+			getButton(config.forwardButton, step).off("click.stepper").on("click.stepper", function (event) { stepper.nextStep(); return false; })
+			getButton(config.backButton, step).off("click.stepper").on("click.stepper", function (event) { stepper.prevStep(); return false; })
 			return step
 		},
 
@@ -74,7 +83,7 @@ jQuery.fn.stepper = function (config) {
 					}
 				}
 			}
-			this.container.hide().find('.step').hide()
+			this.container.hide().find(".step").hide()
 			return this
 		},
 
@@ -82,10 +91,10 @@ jQuery.fn.stepper = function (config) {
 
 			for (step in this.stepConfig) {
 				if (this.stepConfig.hasOwnProperty(step)) {
-					this.numberOfSteps++
+					this.numberOfSteps += 1
 				}
 			}
-			this.numberOfSteps += this.container.find('.step').length
+			this.numberOfSteps += this.container.find(".step").length
 			this.hideAll()
 			return this
 		},
@@ -99,10 +108,19 @@ jQuery.fn.stepper = function (config) {
 
 				this.hideAll()
 
-				// dom structure is only known with steps that are in 'this.container'
+				if (number < 2) {
+					getButton(config.backButton).hide()
+					getButton(config.forwardButton).show()
+				}
+				else if (number >= this.numberOfSteps) {
+					getButton(config.forwardButton).hide()
+					getButton(config.backButton).show()
+				}
+
+				// dom structure is only known with steps that are in "this.container"
 				var nextStep = this.setButtonEvents(nextStep)
 
-				var nextStepContainer = nextStep.parent('div').show()
+				var nextStepContainer = nextStep.parent("div").show()
 				var n = nextStep
 				var previousStepNumber = stepper.activeStepNumber
 				function onComplete () {
@@ -110,9 +128,9 @@ jQuery.fn.stepper = function (config) {
 				}
 				if (this.defaultAnimation) {
 					var da = this.defaultAnimation
-					if ('fadeIn' == da) { n.fadeIn(this.animationSpeed, onComplete) }
-					else if ('slideDown' == da) { n.slideDown(this.animationSpeed, onComplete)	}
-					else if ('slideUp' == da) {	n.slideUp(this.animationSpeed, onComplete) }
+					if ("fadeIn" == da) { n.fadeIn(this.animationSpeed, onComplete) }
+					else if ("slideDown" == da) { n.slideDown(this.animationSpeed, onComplete)	}
+					else if ("slideUp" == da) {	n.slideUp(this.animationSpeed, onComplete) }
 					else { n.show(this.animationSpeed, onComplete)	}
 				}
 				else {
