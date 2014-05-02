@@ -55,7 +55,7 @@ An example stepper container HTML-structure using CSS-classes (not required):
 |autoHideBackForward|If true, hides the back button on the first step and the forward button on the last step. The default is "true"|boolean|
 
 # Methods
-- showStep(number)
+- showStep(number, boolean) - if the second argument is a true value, the onStepChange and onAfterStepChange events are not triggered
 - hideAll()
 - showFirstStepThatContains(selector)
 - nextStep()
