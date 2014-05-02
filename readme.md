@@ -28,7 +28,7 @@ $(function () {
 });
 ```
 
-An example stepper container HTML-structure using CSS-classes (not required):
+An example stepper container HTML-structure using CSS-classes:
 
 ```css
   div#mywizard
