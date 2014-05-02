@@ -1,6 +1,6 @@
-/* jquery.stepper.src.js 2013-4-8 | https://github.com/Intera/jquery.stepper */
+/* jquery.stepper.src.js 2014-5-2 | https://github.com/Intera/jquery.stepper */
 
-jQuery.fn.stepper = function (config) {
+jQuery.fn.stepper = function(config) {
 
 	// merge default config
 	var defaultConfig = {
@@ -43,7 +43,7 @@ jQuery.fn.stepper = function (config) {
 		animationSpeed: config.animationSpeed || 190,
 		numberOfSteps: 0,
 
-		get: function (number) {
+		get: function(number) {
 			//get an object for step number //number//
 			if (this.stepConfig && this.stepConfig[number]) {
 				return this.stepConfig[number]
@@ -52,28 +52,27 @@ jQuery.fn.stepper = function (config) {
 			}
 		},
 
-		nextStep: function () {
+		nextStep: function() {
 			this.showStep(this.activeStepNumber + 1)
 		},
-		prevStep: function () {
+		prevStep: function() {
 			this.showStep(this.activeStepNumber - 1)
 		},
 
-		disableButtonEvents: function () {
-			var step = this.get(this.activeStepNumber)
-			getButton(config.forwardButton).add(getButton(config.backButton)).off("click.stepper")
+		disableButtonEvents: function(step) {
+			getButton(config.forwardButton, step).add(getButton(config.backButton, step)).off("click.stepper")
 		},
 
-		enableButtonEvents: function () { this.setButtonEvents(this.get(this.activeStepNumber)) },
+		enableButtonEvents: function() { this.setButtonEvents(this.get(this.activeStepNumber)) },
 
-		setButtonEvents: function (step) {
+		setButtonEvents: function(step) {
 			//remove existing events because containers can be reused and used in different orders at the same time
-			getButton(config.forwardButton, step).off("click.stepper").on("click.stepper", function (event) { stepper.nextStep(); return false; })
-			getButton(config.backButton, step).off("click.stepper").on("click.stepper", function (event) { stepper.prevStep(); return false; })
+			getButton(config.forwardButton, step).off("click.stepper").on("click.stepper", function(event) { stepper.nextStep(); return false; })
+			getButton(config.backButton, step).off("click.stepper").on("click.stepper", function(event) { stepper.prevStep(); return false; })
 			return step
 		},
 
-		hideAll: function () {
+		hideAll: function() {
 
 			// hide all steps which lie outside this step container
 			if (this.stepConfig) {
@@ -100,34 +99,34 @@ jQuery.fn.stepper = function (config) {
 			return this
 		},
 
-		showStep: function (number) {
+		showStep: function(number, withoutEvents) {
 
 			var nextStep = this.get(number)
 
 			// continue only if onStepChange is true
-			if (this.onStepChange(this.activeStepNumber, number, this, nextStep)) {
+			if (withoutEvents || this.onStepChange(this.activeStepNumber, number, this, nextStep)) {
 
 				this.hideAll()
 
 				if (config.autoHideBackForward) {
 					if (number < 2) {
-						getButton(config.backButton).hide()
-						getButton(config.forwardButton).show()
+						getButton(config.backButton, nextStep).hide()
+						getButton(config.forwardButton, nextStep).show()
 					}
 					else if (number >= this.numberOfSteps) {
-						getButton(config.forwardButton).hide()
-						getButton(config.backButton).show()
+						getButton(config.forwardButton, nextStep).hide()
+						getButton(config.backButton, nextStep).show()
 					}
 				}
 
 				// dom structure is only known with steps that are in "this.container"
 				var nextStep = this.setButtonEvents(nextStep)
 
-				var nextStepContainer = nextStep.parent("div").show()
+				nextStep.parent("div").show()
 				var n = nextStep
 				var previousStepNumber = stepper.activeStepNumber
 				function onComplete () {
-					config.onAfterStepChange(previousStepNumber, number, stepper, nextStep)
+					if (!withoutEvents) config.onAfterStepChange(previousStepNumber, number, stepper, nextStep)
 				}
 				if (this.defaultAnimation) {
 					var da = this.defaultAnimation
@@ -155,7 +154,6 @@ jQuery.fn.stepper = function (config) {
 		showFirstStepThatContains: function(selector) {
 
 			var step = 1
-			var stepContainingElement = false
 			while (step <= this.numberOfSteps) {
 
 				var stepItem = this.get(step)
