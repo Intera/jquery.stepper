@@ -3,10 +3,10 @@ Shows DOM-elements sequentially with forward and back buttons and events.
 
 # Features
 - Arbitrary DOM-elements can be configured as a series and displayed sequentially
-- Steps can be shared between series and multiple stepper instances
-- Unlimited number of steppers per page
 - Automatic Forward/back-button hiding/display and events for the first and last page
 - Events before and after step switch, for example to set different headings per step or other custom actions
+- Unlimited number of steppers per page
+- Steps can be shared between series and multiple stepper instances
 - Series configuration can optionally be made with CSS-classes alone
 - Show/hide of one or multiple elements per step
 - No encapsulating Container necessary
