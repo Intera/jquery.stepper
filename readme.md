@@ -2,33 +2,32 @@
 Shows DOM-elements sequentially with forward and back buttons and events.
 
 # Features
-- Arbitrary DOM-elements can be displayed sequentially
+- Arbitrary DOM-elements can be configured as a series and displayed sequentially
+- Steps can be shared between series and multiple stepper instances
 - Unlimited number of steppers per page
-- Multiple steppers can share DOM-elements
-- forward/back-button hiding/display and events for the first and last page
-- Step and order configuration can be made with CSS classes
-- Events - for example for setting different titles per step or other custom actions
-- Steps can be outside a main "stepContainer" (and the back-button still works as expected)
-- Steps can show/hide multiple elements at once
-- Animation
+- Automatic Forward/back-button hiding/display and events for the first and last page
+- Events before and after step switch, for example to set different headings per step or other custom actions
+- Series configuration can optionally be made with CSS-classes alone
+- Show/hide of one or multiple elements per step
+- No encapsulating Container necessary
+- Step switch Animation
 
 # Dependencies
 - jQuery
 
 # Usage
-The default is to use elements with class ``step`` in the order defined by additional classes ``stepN``. For example ``step1``, ``step2``, etc.
-Elements with the class "nextStep" or "prevStep" get the corresponding functionality in context.
-Steps can also be configured with the "stepConfig" option.
+The default is to use elements with class ``step`` in the order defined by additional classes ``stepN``. For example ``step1``, ``step2``, et cetera
+Elements with the class "nextStep" or "prevStep" get the corresponding button-functionality
 
 ## Example
 ```javascript
 $(function () {
-	var myWizard = $('#mywizard').stepper()
-	myWizard.showStep(1)
-});
+	var stepper = $('#stepper').stepper()
+	stepper.showStep(1)
+})
 ```
 
-An example stepper container HTML-structure using CSS-classes:
+An example stepper container HTML-structure with a series of steps configured using CSS-classes:
 
 ```css
   div#mywizard
