@@ -30,7 +30,7 @@ $(function () {
 An example stepper container HTML-structure with a series of steps configured using CSS-classes:
 
 ```css
-  div#mywizard
+  div#stepper
     div.step.step1
       div.nextStep
     div.step.step2
