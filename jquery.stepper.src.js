@@ -83,7 +83,7 @@ jQuery.fn.stepper = function(config) {
 					}
 				}
 			}
-			this.container.hide().find(".step").hide()
+			this.container.find(".step").hide()
 			return this
 		},
 
@@ -122,7 +122,6 @@ jQuery.fn.stepper = function(config) {
 				// dom structure is only known with steps that are in "this.container"
 				var nextStep = this.setButtonEvents(nextStep)
 
-				nextStep.parent("div").show()
 				var n = nextStep
 				var previousStepNumber = stepper.activeStepNumber
 				function onComplete () {
