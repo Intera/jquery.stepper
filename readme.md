@@ -30,14 +30,14 @@ $(function () {
 An example stepper container HTML-structure with a series of steps configured using CSS-classes:
 
 ```css
-  div#stepper
-    div.step.step1
-      div.nextStep
-    div.step.step2
-      div.prevStep
-      div.nextStep
-    div.step.step3
-      div.nextStep
+  #stepper
+    .step.step1
+      .nextStep
+    .step.step2
+      .prevStep
+      .nextStep
+    .step.step3
+      .nextStep
     ...
 ```
 
