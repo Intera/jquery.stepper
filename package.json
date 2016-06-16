@@ -1,0 +1,16 @@
+{
+  "name": "jquery.stepper",
+  "version": "1.0.0",
+  "license": "GPL-3.0+",
+  "description": "Shows DOM-elements sequentially with forward and back buttons and events",
+  "homepage": "https://github.com/Intera/jquery.stepper",
+  "bugs": {
+    "url" : "https://github.com/Intera/jquery.stepper/issues",
+    "email" : "jkalbhenn@intera.de"
+  },
+  "repository": {
+    "type": "git",
+    "url" : "https://github.com/Intera/jquery.stepper"
+  },
+  "keywords": ["jquery-plugin", "ecosystem:jquery", "nested-list"]
+}
